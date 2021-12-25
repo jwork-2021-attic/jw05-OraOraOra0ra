@@ -238,7 +238,7 @@ public class PlayScreen implements Screen {
         creasLoc[7][1] = snake.y();
         score[7] = snake.getSize();
 
-        if (flag < 20) {
+        if (flag < 1) {
             for(int i = 0; i < 7; i++) {
                 hulus[i].close();
                 creas[i] = hulus[i];

@@ -280,7 +280,7 @@ public class PlayScene extends Application {
                         repaint();
                     });
                     if (flag == 1) {
-                        Thread.sleep(2000);
+                        Thread.sleep(3000);
                         t.interrupt();
                     }
                 } catch (InterruptedException e) {

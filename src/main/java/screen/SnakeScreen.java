@@ -147,15 +147,21 @@ public class SnakeScreen implements Screen {
 
         world.creatureLock.lock();
         try {
+            int last = 0;
             for (int i = 0; i < 7; i++) {
-                if(world.boolAlive(i))
-                    if (world.creature(hulus[i].x(), hulus[i].y())==hulus[i])
+                if(world.boolAlive(i)) {
+                    last++;
+                    if (world.creature(hulus[i].x(), hulus[i].y()) == hulus[i])
                         grid.add(huluView[i], hulus[i].x(), hulus[i].y());
+                }
             }
             if(world.boolAlive(7)) {
                 grid.add(snakeView, snake.x(), snake.y());
                 if (snake.legal(dest[0], dest[1]))
                     grid.add(swordView, snake.x() + dest[0], snake.y() + dest[1]);
+            }
+            if (last == 0) {
+                paintGrey();
             }
         } finally {
             world.creatureLock.unlock();
@@ -174,9 +180,19 @@ public class SnakeScreen implements Screen {
             creasLoc[7][1] = snake.y();
         }
 
-        if (flag == 0)
+        if (flag == 0) {
             return 1;
+        }
         return 0;
+    }
+
+    public void paintGrey() {
+        for (int x = 0; x < screenWidth; x++) {
+            for (int y = 0; y < screenHeight; y++) {
+                if (world.tile(x,y)!=Tile.WALLB)
+                    world.setTile(x,y,Tile.FLOORS);
+            }
+        }
     }
 
     @Override
